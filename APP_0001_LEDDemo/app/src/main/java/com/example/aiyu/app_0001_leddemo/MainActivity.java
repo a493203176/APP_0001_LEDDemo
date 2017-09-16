@@ -1,5 +1,6 @@
 package com.example.aiyu.app_0001_leddemo;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +10,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-
+import com.example.aiyu.hardlibrary.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBoxLed3 = null;
     private CheckBox checkBoxLed4 = null;
     private boolean ledon = false;
+    private int i = 0;
 
     class MyButtonListener implements View.OnClickListener {
         @Override
@@ -27,12 +29,17 @@ public class MainActivity extends AppCompatActivity {
             // Perform action on click
             ledon = !ledon;
 
+
             if(ledon) {
                 button.setText("ALL OFF");
                 checkBoxLed1.setChecked(true);
                 checkBoxLed2.setChecked(true);
                 checkBoxLed3.setChecked(true);
                 checkBoxLed4.setChecked(true);
+
+                for(i=0; i<4; i++) {
+                    HardControl.ledCtrl(i,1);
+                }
             }
             else {
                 button.setText("ALL ON");
@@ -40,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 checkBoxLed2.setChecked(false);
                 checkBoxLed3.setChecked(false);
                 checkBoxLed4.setChecked(false);
+
+                for(i=0; i<4; i++) {
+                    HardControl.ledCtrl(i,1);
+                }
             }
         }
 
@@ -52,33 +63,41 @@ public class MainActivity extends AppCompatActivity {
             case R.id.LED1 : {
                 if (checked) {
                     Toast.makeText(getApplicationContext(),"LED1 on",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(0,1);
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"LED1 off",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(0, 0);
                 }
             }break;
             case R.id.LED2 : {
                 if (checked) {
                     Toast.makeText(getApplicationContext(),"LED2 on",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(1, 1);
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"LED2 off",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(1, 0);
                 }
             }break;
             case R.id.LED3 : {
                 if (checked) {
                     Toast.makeText(getApplicationContext(),"LED3 on",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(2, 1);
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"LED3 off",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(2, 0);
                 }
             }break;
             case R.id.LED4 : {
                 if (checked) {
                     Toast.makeText(getApplicationContext(),"LED4 on",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(3, 1);
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"LED4 off",Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(3, 0);
                 }
             }break;
             default: break;
@@ -92,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button)findViewById(R.id.BUTTON);
 
+        HardControl.ledOpen();
         checkBoxLed1 = (CheckBox)findViewById(R.id.LED1);
         checkBoxLed2 = (CheckBox)findViewById(R.id.LED2);
         checkBoxLed3 = (CheckBox)findViewById(R.id.LED3);
@@ -114,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         */
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
