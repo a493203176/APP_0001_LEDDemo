@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 checkBoxLed4.setChecked(false);
 
                 for(i=0; i<4; i++) {
-                    HardControl.ledCtrl(i,1);
+                    HardControl.ledCtrl(i,0);
                 }
             }
         }
